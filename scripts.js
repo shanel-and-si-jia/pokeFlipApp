@@ -4,6 +4,7 @@ const pokeApp = {}
 pokeApp.cards = document.querySelectorAll('.card');
 pokeApp.startBtn = document.querySelector('.start');
 pokeApp.game = document.querySelector('.gameContainer');
+pokeApp.tryText = document.querySelector('.tryCounter p');
 
 pokeApp.hasFlipped = false;
 pokeApp.lockBoard = false;
@@ -12,7 +13,7 @@ pokeApp.secondCard = '';
 pokeApp.numTry = 8;
 
 
-// function that will be attached to event listener to flip a card
+// Function that will be attached to event listener to flip a card
 pokeApp.flipCard = function() {
     // Check if the board is locked, if so do nothing
     if (pokeApp.lockBoard) return;
@@ -24,17 +25,17 @@ pokeApp.flipCard = function() {
 
     // Check if hasFlipped is true or false    
     if(!pokeApp.hasFlipped){
-        // if hasFlipped is false make it true
+        // If hasFlipped is false make it true
         pokeApp.hasFlipped = true;
         // Change value of firstCard to card that was just clicked
         pokeApp.firstCard = this;
         
     } else {
-        // if hasFlipped is true make it false
+        // If hasFlipped is true make it false
         pokeApp.hasFlipped = false;
         // Change value of secondCard to card that was just clicked
         pokeApp.secondCard = this;
-        // run function to check if cards match
+        // Run function to check if cards match
         pokeApp.checkIfMatch();
     }
 }
@@ -54,11 +55,14 @@ pokeApp.checkIfMatch = function() {
     
     } else {
         // If firstCard and secondCard doesn't match, flip them backwards
-        // The game board is locked when cards don't match to prevent user from
-        // selecting more cards during the animation
+        // The game board is locked when cards don't match to prevent user
+        // from selecting more cards during the animation
         pokeApp.lockBoard = true;
         // If non-match, number of tries will decrement by 1
         pokeApp.numTry--;
+        // Update the counter real time
+        pokeApp.tryText.innerText = `You have: ${pokeApp.numTry} tries left`;
+
         // Add set time before cards are flipped back for user to see
         setTimeout(() => {
             pokeApp.firstCard.classList.remove('flip');
@@ -67,30 +71,40 @@ pokeApp.checkIfMatch = function() {
             // Run endGame if user runs out of tries
             pokeApp.endGame();
         }, 1000);
-        
-        console.log(pokeApp.numTry);
     }
 }
 
 // End game once number of tries run out
 pokeApp.endGame = () => {
     if(pokeApp.numTry === 0) {
+        // When game ends, reset already matched cards to default value
+        pokeApp.cards.forEach((card) => {
+            card.classList.remove('matched', 'flip');
+            card.addEventListener('click', pokeApp.flipCard);
+        });
         // When game end, remove game board and show notice
         pokeApp.game.classList.add('hide');
+        
         // Start/Reply button reappear
         setTimeout(() => {
             pokeApp.startBtn.classList.remove('hide')
-        }, 1000);
+        }, 900);
     }
 }
 
 // Start game button function
 pokeApp.startGame = () => {
     pokeApp.startBtn.addEventListener('click', () => {
+        // Number of trials reset back to origin
+        pokeApp.numTry = 8;
         // When start game button is clicked, remove hide class from gameboard
         pokeApp.game.classList.remove('hide');
         // Then add hide class to the start button
         pokeApp.startBtn.classList.add('hide');
+        // Remove hide class from trial counter at the start of game
+        // Display how many trials remains
+        pokeApp.tryText.classList.remove('hide');
+        pokeApp.tryText.innerText = `You have: ${pokeApp.numTry} tries left`;
     })
 }
 
@@ -102,9 +116,11 @@ pokeApp.resetBoard = () => {
     pokeApp.secondCard = null;
 }
 
+
 pokeApp.init = () => {
     pokeApp.startGame();
     pokeApp.cards.forEach(card => card.addEventListener('click', pokeApp.flipCard));
 }
 
+// Call init to start our app
 pokeApp.init();
