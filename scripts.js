@@ -71,8 +71,6 @@ pokeApp.checkIfMatch = function() {
             // Run endGame if user runs out of tries
             pokeApp.endGame();
         }, 1000);
-        
-        console.log(pokeApp.numTry);
     }
 }
 
