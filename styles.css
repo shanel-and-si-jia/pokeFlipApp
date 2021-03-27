@@ -6,7 +6,9 @@ html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}bo
 
 .visuallyHidden:not(:focus):not(:active) { position: absolute; width: 1px; height: 1px; margin: -1px;border: 0;padding: 0;white-space: nowrap;clip-path: inset(100%);clip: rect(00 0 0);overflow: hidden;}
 
+
 /* General styling */
+
 html {
     font-family: 'Press Start 2P', cursive;
     font-size: 125%;
@@ -24,7 +26,9 @@ img {
 }
 
 h1,
-h2 {
+h2,
+p,
+a {
     text-align: center;
     color: #FFF;
 }
@@ -44,15 +48,32 @@ p {
     margin: 0;
 }
 
+a {
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+a:hover {
+    color: #000;
+}
+
+
+/* Game board styling */
+
+.start,
+.frontCard,
+.backCard {
+    position: absolute;
+}
+
 .start {
     display: block;
     font-family: 'Press Start 2P', cursive;
-    background-color: #fff;
+    background-color: #FFF;
     border-radius: 5px;
     border: none;
     padding: 20px;
     margin: 0 auto;
-    position: absolute;
     top: calc(50% - 40px);
     right: calc(50% - 120px);
 }
@@ -67,11 +88,24 @@ p {
     perspective: 1000px;
 }
 
-.card {
+.tryCounter p {
+    font-size: 0.9rem;
+    margin: 40px 0 20px 0;
+}
+
+
+/* Card flip styling */
+
+.card,
+.frontCard,
+.backFace {
     width: 150px;
     height: 190px;
-    margin: 10px;
+}
+
+.card {
     position: relative;
+    margin: 10px;
     transform-style: preserve-3d; 
     transition: transform 0.5s; 
 }
@@ -79,45 +113,40 @@ p {
 .frontFace, 
 .backFace {
     backface-visibility: hidden;
-    
+}
+
+.frontCard {
+    background: #FFF;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: rotateY(180deg);
+}
+
+.frontCard p {
+    color: #000;
 }
 
 .frontFace {
     margin-bottom: 10px;
 }
 
-.frontCard {
-    /* display: none; */
-    background: #FFF;
-    border-radius: 20px;
-    width: 150px;
-    height: 190px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    transform: rotateY(180deg);
-}
-
-.backCard {
-    position: absolute;
+.backFace {
+    transition: all 0.5s;
 }
 
 .flip {
     transform: rotateY(180deg); 
 }
 
-.matched {
-    visibility: hidden;
-}
-
-.backFace {
-    width: 150px;
-    height: 190px;
-    transition: all 0.5s;
-}
-
+.matched,
 .hide {
     visibility: hidden;
+}
+
+footer {
+    margin-top: 20px;
+    padding: 20px 0;
 }
