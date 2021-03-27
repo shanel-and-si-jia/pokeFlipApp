@@ -11,6 +11,7 @@ pokeApp.lockBoard = false;
 pokeApp.firstCard = '';
 pokeApp.secondCard = '';
 pokeApp.numTry = 8;
+pokeApp.matches = 0;
 
 
 // Function that will be attached to event listener to flip a card
@@ -46,11 +47,14 @@ pokeApp.checkIfMatch = function() {
     if(pokeApp.firstCard.innerText === pokeApp.secondCard.innerText){
         pokeApp.firstCard.removeEventListener('click', pokeApp.flipCard);
         pokeApp.secondCard.removeEventListener('click', pokeApp.flipCard);
+        pokeApp.matches++
         // Add set time before removing matched card for user to see
         setTimeout(() => {
             pokeApp.firstCard.classList.add('matched')
             pokeApp.secondCard.classList.add('matched')
             pokeApp.resetBoard();
+            // run endGame if all matches have been made
+            pokeApp.endGame()
         }, 1000);
     
     } else {
@@ -74,29 +78,20 @@ pokeApp.checkIfMatch = function() {
     }
 }
 
-// End game once number of tries run out
-pokeApp.endGame = () => {
-    if(pokeApp.numTry === 0) {
-        // When game ends, reset already matched cards to default value
-        pokeApp.cards.forEach((card) => {
-            card.classList.remove('matched', 'flip');
-            card.addEventListener('click', pokeApp.flipCard);
-        });
-        // When game end, remove game board and show notice
-        pokeApp.game.classList.add('hide');
-        
-        // Start/Reply button reappear
-        setTimeout(() => {
-            pokeApp.startBtn.classList.remove('hide')
-        }, 900);
-    }
+// Game board error control function
+pokeApp.resetBoard = () => {
+    pokeApp.hasFlipped = false;
+    pokeApp.lockBoard = false;
+    pokeApp.firstCard = null;
+    pokeApp.secondCard = null;
 }
 
 // Start game button function
 pokeApp.startGame = () => {
     pokeApp.startBtn.addEventListener('click', () => {
-        // Number of trials reset back to origin
+        // Number of tries and matches reset back to origin
         pokeApp.numTry = 8;
+        pokeApp.matches = 0;
         // When start game button is clicked, remove hide class from gameboard
         pokeApp.game.classList.remove('hide');
         // Then add hide class to the start button
@@ -108,14 +103,34 @@ pokeApp.startGame = () => {
     })
 }
 
-// Game board error control function
-pokeApp.resetBoard = () => {
-    pokeApp.hasFlipped = false;
-    pokeApp.lockBoard = false;
-    pokeApp.firstCard = null;
-    pokeApp.secondCard = null;
+pokeApp.endState = () => {
+    // When game ends, reset already matched cards to default value
+    pokeApp.cards.forEach((card) => {
+        card.classList.remove('matched', 'flip');
+        card.addEventListener('click', pokeApp.flipCard);
+    });
+    // When game end, remove game board and show notice
+    pokeApp.game.classList.add('hide');
+    
+    // Start/Reply button reappear
+    setTimeout(() => {
+        pokeApp.startBtn.innerText = 'Play Again';
+        pokeApp.startBtn.classList.remove('hide');
+    }, 900);
 }
 
+// End game once number of tries run out
+pokeApp.endGame = () => {
+    if(pokeApp.numTry === 0) {
+        pokeApp.tryText.innerText = `Sorry, you have run out of tries`
+        pokeApp.endState()
+    } else if(pokeApp.matches === 8) {
+        pokeApp.tryText.innerText = `Congratulations, you have won! You have a great memory.`
+        pokeApp.endState()
+    } else {
+        return;
+    }
+}
 
 pokeApp.init = () => {
     pokeApp.startGame();
