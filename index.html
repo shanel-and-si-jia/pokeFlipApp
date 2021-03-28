@@ -15,132 +15,152 @@
 
   </head>
   <body>
-    <header>
-      <h1>Poke-Flip!</h1>
-      <h2>A Pokemon game that tests your memory</h2>
-    </header>
-    <main>
-      <button class="start">Start Game</button>
-      <div class="tryCounter">
+    <div class="wrapper">
+      <header>
+        <h1>Poke-Flip!</h1>
+        <h2>A Pokemon game that tests your memory</h2>
+      </header>
+      <main>
+        <!-- Code for difficulty option -->
+        <form action="#" method="#" class="pokeForm" name="pokeForm">
+          <div class="notice">
+            <p>Please select difficulty level. Difficulty will affect the number of tries available for the player.</p>
+          </div>
+          <div class="flexContainer">
+            <div class="selection">
+              <label for="difficulty">Choose your difficulty:</label>
+              <select id="difficulty" name="difficulty">
+                <option value="0" disabled selected>Select</option>
+                <option value="14">Easy</option>
+                <option value="12">Normal</option>
+                <option value="8">Hard</option>
+              </select>
+            </div>
+          </div>
+        </form>
+        <!-- Code for start button -->
+        <button class="start">Start Game</button>
         <!-- Code for trial counter -->
-        <p class="hide"></p>
-      </div>
-      <div class="gameContainer hide">
-        <div class="card">
-          <div class="frontCard">
-            <img class="frontFace" src="./assets/pokemon.png" alt="" />
-            <p>test1</p>
-          </div>
-          <div class="backCard"><img class="backFace" src="./assets/card-back.png" alt="" /></div>
+        <div class="tryCounter">
+          <p class="hide"></p>
         </div>
-        <div class="card">
-          <div class="frontCard">
-            <img class="frontFace" src="./assets/pokemon.png" alt="" />
-            <p>test2</p>
+        <!-- Code for card game -->
+        <div class="gameContainer hide">
+          <div class="card">
+            <div class="frontCard">
+              <img class="frontFace" src="./assets/pokemon.png" alt="" />
+              <p>test1</p>
+            </div>
+            <div class="backCard"><img class="backFace" src="./assets/card-back.png" alt="" /></div>
           </div>
-          <div class="backCard"><img class="backFace" src="./assets/card-back.png" alt="" /></div>
-        </div>
-        <div class="card">
-          <div class="frontCard">
-            <img class="frontFace" src="./assets/pokemon.png" alt="" />
-            <p>test3</p>
+          <div class="card">
+            <div class="frontCard">
+              <img class="frontFace" src="./assets/pokemon.png" alt="" />
+              <p>test2</p>
+            </div>
+            <div class="backCard"><img class="backFace" src="./assets/card-back.png" alt="" /></div>
           </div>
-          <div class="backCard"><img class="backFace" src="./assets/card-back.png" alt="" /></div>
-        </div>
-        <div class="card">
-          <div class="frontCard">
-            <img class="frontFace" src="./assets/pokemon.png" alt="" />
-            <p>test4</p>
+          <div class="card">
+            <div class="frontCard">
+              <img class="frontFace" src="./assets/pokemon.png" alt="" />
+              <p>test3</p>
+            </div>
+            <div class="backCard"><img class="backFace" src="./assets/card-back.png" alt="" /></div>
           </div>
-          <div class="backCard"><img class="backFace" src="./assets/card-back.png" alt="" /></div>
-        </div>
-        <div class="card">
-          <div class="frontCard">
-            <img class="frontFace" src="./assets/pokemon.png" alt="" />
-            <p>test5</p>
+          <div class="card">
+            <div class="frontCard">
+              <img class="frontFace" src="./assets/pokemon.png" alt="" />
+              <p>test4</p>
+            </div>
+            <div class="backCard"><img class="backFace" src="./assets/card-back.png" alt="" /></div>
           </div>
-          <div class="backCard"><img class="backFace" src="./assets/card-back.png" alt="" /></div>
-        </div>
-        <div class="card">
-          <div class="frontCard">
-            <img class="frontFace" src="./assets/pokemon.png" alt="" />
-            <p>test6</p>
+          <div class="card">
+            <div class="frontCard">
+              <img class="frontFace" src="./assets/pokemon.png" alt="" />
+              <p>test5</p>
+            </div>
+            <div class="backCard"><img class="backFace" src="./assets/card-back.png" alt="" /></div>
           </div>
-          <div class="backCard"><img class="backFace" src="./assets/card-back.png" alt="" /></div>
-        </div>
-        <div class="card">
-          <div class="frontCard">
-            <img class="frontFace" src="./assets/pokemon.png" alt="" />
-            <p>test7</p>
+          <div class="card">
+            <div class="frontCard">
+              <img class="frontFace" src="./assets/pokemon.png" alt="" />
+              <p>test6</p>
+            </div>
+            <div class="backCard"><img class="backFace" src="./assets/card-back.png" alt="" /></div>
           </div>
-          <div class="backCard"><img class="backFace" src="./assets/card-back.png" alt="" /></div>
-        </div>
-        <div class="card">
-          <div class="frontCard">
-            <img class="frontFace" src="./assets/pokemon.png" alt="" />
-            <p>test8</p>
+          <div class="card">
+            <div class="frontCard">
+              <img class="frontFace" src="./assets/pokemon.png" alt="" />
+              <p>test7</p>
+            </div>
+            <div class="backCard"><img class="backFace" src="./assets/card-back.png" alt="" /></div>
           </div>
-          <div class="backCard"><img class="backFace" src="./assets/card-back.png" alt="" /></div>
-        </div>
-        <div class="card">
-          <div class="frontCard">
-            <img class="frontFace" src="./assets/pokemon.png" alt="" />
-            <p>test1</p>
+          <div class="card">
+            <div class="frontCard">
+              <img class="frontFace" src="./assets/pokemon.png" alt="" />
+              <p>test8</p>
+            </div>
+            <div class="backCard"><img class="backFace" src="./assets/card-back.png" alt="" /></div>
           </div>
-          <div class="backCard"><img class="backFace" src="./assets/card-back.png" alt="" /></div>
-        </div>
-        <div class="card">
-          <div class="frontCard">
-            <img class="frontFace" src="./assets/pokemon.png" alt="" />
-            <p>test2</p>
+          <div class="card">
+            <div class="frontCard">
+              <img class="frontFace" src="./assets/pokemon.png" alt="" />
+              <p>test1</p>
+            </div>
+            <div class="backCard"><img class="backFace" src="./assets/card-back.png" alt="" /></div>
           </div>
-          <div class="backCard"><img class="backFace" src="./assets/card-back.png" alt="" /></div>
-        </div>
-        <div class="card">
-          <div class="frontCard">
-            <img class="frontFace" src="./assets/pokemon.png" alt="" />
-            <p>test3</p>
+          <div class="card">
+            <div class="frontCard">
+              <img class="frontFace" src="./assets/pokemon.png" alt="" />
+              <p>test2</p>
+            </div>
+            <div class="backCard"><img class="backFace" src="./assets/card-back.png" alt="" /></div>
           </div>
-          <div class="backCard"><img class="backFace" src="./assets/card-back.png" alt="" /></div>
-        </div>
-        <div class="card">
-          <div class="frontCard">
-            <img class="frontFace" src="./assets/pokemon.png" alt="" />
-            <p>test4</p>
+          <div class="card">
+            <div class="frontCard">
+              <img class="frontFace" src="./assets/pokemon.png" alt="" />
+              <p>test3</p>
+            </div>
+            <div class="backCard"><img class="backFace" src="./assets/card-back.png" alt="" /></div>
           </div>
-          <div class="backCard"><img class="backFace" src="./assets/card-back.png" alt="" /></div>
-        </div>
-        <div class="card">
-          <div class="frontCard">
-            <img class="frontFace" src="./assets/pokemon.png" alt="" />
-            <p>test5</p>
+          <div class="card">
+            <div class="frontCard">
+              <img class="frontFace" src="./assets/pokemon.png" alt="" />
+              <p>test4</p>
+            </div>
+            <div class="backCard"><img class="backFace" src="./assets/card-back.png" alt="" /></div>
           </div>
-          <div class="backCard"><img class="backFace" src="./assets/card-back.png" alt="" /></div>
-        </div>
-        <div class="card">
-          <div class="frontCard">
-            <img class="frontFace" src="./assets/pokemon.png" alt="" />
-            <p>test6</p>
+          <div class="card">
+            <div class="frontCard">
+              <img class="frontFace" src="./assets/pokemon.png" alt="" />
+              <p>test5</p>
+            </div>
+            <div class="backCard"><img class="backFace" src="./assets/card-back.png" alt="" /></div>
           </div>
-          <div class="backCard"><img class="backFace" src="./assets/card-back.png" alt="" /></div>
-        </div>
-        <div class="card">
-          <div class="frontCard">
-            <img class="frontFace" src="./assets/pokemon.png" alt="" />
-            <p>test7</p>
+          <div class="card">
+            <div class="frontCard">
+              <img class="frontFace" src="./assets/pokemon.png" alt="" />
+              <p>test6</p>
+            </div>
+            <div class="backCard"><img class="backFace" src="./assets/card-back.png" alt="" /></div>
           </div>
-          <div class="backCard"><img class="backFace" src="./assets/card-back.png" alt="" /></div>
-        </div>
-        <div class="card">
-          <div class="frontCard">
-            <img class="frontFace" src="./assets/pokemon.png" alt="" />
-            <p>test8</p>
+          <div class="card">
+            <div class="frontCard">
+              <img class="frontFace" src="./assets/pokemon.png" alt="" />
+              <p>test7</p>
+            </div>
+            <div class="backCard"><img class="backFace" src="./assets/card-back.png" alt="" /></div>
           </div>
-          <div class="backCard"><img class="backFace" src="./assets/card-back.png" alt="" /></div>
+          <div class="card">
+            <div class="frontCard">
+              <img class="frontFace" src="./assets/pokemon.png" alt="" />
+              <p>test8</p>
+            </div>
+            <div class="backCard"><img class="backFace" src="./assets/card-back.png" alt="" /></div>
+          </div>
         </div>
-        
-      </div>
-    </main>
+      </main>
+    </div>
     <footer>
       <p>Created at <a href="https://junocollege.com/">Juno College</a> by Shanel B. and Si-Jia M.</p>
     </footer>

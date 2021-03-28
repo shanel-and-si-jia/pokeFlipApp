@@ -50,13 +50,14 @@ pokeApp.frontFaces = document.querySelectorAll('.frontFace');
 pokeApp.pElements = document.querySelectorAll('.gameContainer p');
 pokeApp.game = document.querySelector('.gameContainer');
 pokeApp.tryText = document.querySelector('.tryCounter p');
-
+pokeApp.form = document.querySelector('form');
+pokeApp.difficultyValue = document.getElementById('difficulty');
 
 pokeApp.hasFlipped = false;
 pokeApp.lockBoard = false;
 pokeApp.firstCard = '';
 pokeApp.secondCard = '';
-pokeApp.numTry = 8;
+pokeApp.numTry;
 pokeApp.matches = 0;
 
 // function to generate an array of unique random numbers found at https://dev.to/sagdish/generate-unique-non-repeating-random-numbers-g6g
@@ -80,7 +81,7 @@ pokeApp.getPokes = async () => {
       // Get poke's image
       const sprite = data.sprites.other;
       const image = sprite[`official-artwork`].front_default;
-      // Set name and image in pokeArray
+        // Set name and image in pokeArray
         pokeApp.pokeArray[i].name = pokeName;
         pokeApp.pokeArray[i].alt = pokeName;
         pokeApp.pokeArray[i].image = image;
@@ -175,16 +176,41 @@ pokeApp.resetBoard = () => {
     pokeApp.secondCard = null;
 }
 
+// Function for difficulty selection
+pokeApp.difficulty = () => {
+    // Disable start button if no difficulty is chosen
+    pokeApp.startBtn.disabled = true;
+    pokeApp.difficultyValue.addEventListener('change', () => {
+        pokeApp.numTry = pokeApp.difficultyValue.value;
+        if (pokeApp.numTry == 14 || 12 || 8) {
+            pokeApp.startBtn.disabled = false;
+        }
+    });
+};
+
+// Shuffles poke cards to random order
+pokeApp.shuffle = () => {
+    pokeApp.cards.forEach(card => {
+      // creates random number between 0 and 17
+      let randomPos = Math.floor(Math.random() * 18);
+      // sets order of element based on random number
+      card.style.order = randomPos;
+    });
+};
+
 // Start game button function
 pokeApp.startGame = () => {
     pokeApp.startBtn.addEventListener('click', () => {
+        // Remove difficulty option once game starts
+        pokeApp.form.classList.add('disable');
         pokeApp.startState();
     }, {once: true})
-}
+};
 
 pokeApp.startState = () => {
+    pokeApp.lockBoard = false;
     // Number of tries and matches reset back to origin
-    pokeApp.numTry = 8;
+    pokeApp.numTry;
     pokeApp.matches = 0;
     
     pokeApp.startBtn.textContent = 'Loading...'
@@ -211,8 +237,11 @@ pokeApp.endState = () => {
     // When game end, remove game board and show notice
     pokeApp.game.classList.add('hide');
     
-    // Start/Reply button reappear
+    // Start/Reply button and difficult option reappear
     setTimeout(() => {
+        // Give player option to select difficulty again
+        pokeApp.form.classList.remove('disable');
+        pokeApp.numTry = pokeApp.difficultyValue.value;
         // When game ends, reset already matched cards to default value
         pokeApp.cards.forEach((card) => {
             card.classList.remove('matched', 'flip');
@@ -222,6 +251,8 @@ pokeApp.endState = () => {
         pokeApp.startBtn.classList.remove('hide');
         pokeApp.startBtn.addEventListener('click', () => {
             pokeApp.pokeArray.splice(8, 8);
+            // Remove difficulty option once game starts
+            pokeApp.form.classList.add('disable');
             pokeApp.startState();
         }, {once: true})
     }, 900);
@@ -230,6 +261,7 @@ pokeApp.endState = () => {
 // End game once number of tries run out
 pokeApp.endGame = () => {
     if(pokeApp.numTry === 0) {
+        pokeApp.lockBoard = true;
         setTimeout(() => {
             pokeApp.tryText.innerText = `Sorry, you have run out of tries`
         }, 900)
@@ -245,8 +277,11 @@ pokeApp.endGame = () => {
 }
 
 pokeApp.init = () => {
+    pokeApp.shuffle();
+    pokeApp.difficulty();
     pokeApp.startGame();
     pokeApp.cards.forEach(card => card.addEventListener('click', pokeApp.flipCard));
+    pokeApp.form.reset();
 }
 
 // Call init to start our app
