@@ -72,15 +72,15 @@ pokeApp.randomUnique = (range, count) => {
 // Function to call API and get pokes
 pokeApp.getPokes = async () => {
     for (let i = 0; i < pokeApp.pokeArray.length; i++) {
-      // fetches poke with id based on randomNums
-      const request = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokeApp.randomNums[i]}/`)
-      // converts data to json
+        // fetches poke with id based on randomNums
+        const request = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokeApp.randomNums[i]}/`)
+        // converts data to json
         const data = await request.json()
-      //Get poke's name
-      const pokeName = data.name;
-      // Get poke's image
-      const sprite = data.sprites.other;
-      const image = sprite[`official-artwork`].front_default;
+        //Get poke's name
+        const pokeName = data.name;
+        // Get poke's image
+        const sprite = data.sprites.other;
+        const image = sprite[`official-artwork`].front_default;
         // Set name and image in pokeArray
         pokeApp.pokeArray[i].name = pokeName;
         pokeApp.pokeArray[i].alt = pokeName;
@@ -191,10 +191,10 @@ pokeApp.difficulty = () => {
 // Shuffles poke cards to random order
 pokeApp.shuffle = () => {
     pokeApp.cards.forEach(card => {
-      // creates random number between 0 and 17
-      let randomPos = Math.floor(Math.random() * 18);
-      // sets order of element based on random number
-      card.style.order = randomPos;
+        // creates random number between 0 and 17
+        let randomPos = Math.floor(Math.random() * 18);
+        // sets order of element based on random number
+        card.style.order = randomPos;
     });
 };
 
