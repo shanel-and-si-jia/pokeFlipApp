@@ -216,7 +216,6 @@ template {
   overflow: hidden;
 }
 
-
 /* -------------------------------- */
 
 /* --------------- */
@@ -235,7 +234,8 @@ body {
 }
 
 main {
-  margin-top: 80px;
+  margin: 80px auto 0;
+  max-width: 95%;
 }
 
 img {
@@ -258,8 +258,7 @@ h1 {
 }
 
 h2,
-label,
-.notice p {
+label {
   font-size: 0.7rem;
   letter-spacing: 2px;
 }
@@ -282,7 +281,6 @@ a:hover {
   min-height: 100vh;
 }
 
-
 /* ------------------ */
 /* Game board styling */
 /* ------------------ */
@@ -300,7 +298,7 @@ a:hover {
   border-radius: 5px;
   border: none;
   padding: 20px;
-  margin: 0 auto;
+  margin: 100px auto;
   top: calc(50% - 40px);
   right: calc(50% - 120px);
 }
@@ -317,9 +315,9 @@ a:hover {
 
 .tryCounter p {
   font-size: 0.9rem;
-  margin: 40px 0 20px 0;
+  margin: 40px 0 20px;
+  text-align: center;
 }
-
 
 /* ---------------------------- */
 /* Difficulty selection styling */
@@ -334,6 +332,7 @@ form,
 
 form {
   flex-direction: column;
+  text-align: center;
 }
 
 select {
@@ -347,15 +346,11 @@ select {
   background-position: 90% center;
   background-size: 25px;
   width: 130px;
+  margin-top: 20px;
   padding: 12px 10px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.6rem;
 }
-
-.notice p {
-  line-height: 25px;
-  width: 550px;
-  margin-bottom: 30px;
-}
-
 
 /* ----------------- */
 /* Card flip styling */
@@ -415,7 +410,6 @@ select {
   display: none;
 }
 
-
 /* -------------- */
 /* Footer styling */
 /* -------------- */
@@ -423,4 +417,29 @@ select {
 footer {
   margin-top: 30px;
   padding: 20px 0;
+}
+
+/* -------------- */
+/* Media Queries  */
+/* -------------- */
+
+@media (max-width: 500px) {
+  .gameContainer {
+    width: 100%;
+  }
+
+  .start {
+    top: calc(70% - 40px);
+  }
+
+  .card,
+  .frontCard,
+  .backFace {
+    width: 80px;
+    height: 100px;
+  }
+
+  .frontCard p {
+    font-size: 0.3rem;
+  }
 }
