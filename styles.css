@@ -216,7 +216,12 @@ template {
   overflow: hidden;
 }
 
+
+/* -------------------------------- */
+
+/* --------------- */
 /* General styling */
+/* --------------- */
 
 html {
   font-family: 'Press Start 2P', cursive;
@@ -229,6 +234,10 @@ body {
   min-height: 100vh;
 }
 
+main {
+  margin-top: 80px;
+}
+
 img {
   display: block;
   width: 100%;
@@ -237,7 +246,8 @@ img {
 h1,
 h2,
 p,
-a {
+a,
+label {
   text-align: center;
   color: #fff;
 }
@@ -247,7 +257,9 @@ h1 {
   text-transform: uppercase;
 }
 
-h2 {
+h2,
+label,
+.notice p {
   font-size: 0.7rem;
   letter-spacing: 2px;
 }
@@ -266,7 +278,14 @@ a:hover {
   color: #000;
 }
 
+.wrapper {
+  min-height: 100vh;
+}
+
+
+/* ------------------ */
 /* Game board styling */
+/* ------------------ */
 
 .start,
 .frontCard,
@@ -301,7 +320,46 @@ a:hover {
   margin: 40px 0 20px 0;
 }
 
+
+/* ---------------------------- */
+/* Difficulty selection styling */
+/* ---------------------------- */
+
+form,
+.flexContainer,
+.notice {
+  display: flex;
+  justify-content: center;
+}
+
+form {
+  flex-direction: column;
+}
+
+select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  border-radius: 5px;
+  background-image: url(./assets/chevron-down-solid.svg);
+  background-repeat: no-repeat;
+  background-position: 90% center;
+  background-size: 25px;
+  width: 130px;
+  padding: 12px 10px;
+}
+
+.notice p {
+  line-height: 25px;
+  width: 550px;
+  margin-bottom: 30px;
+}
+
+
+/* ----------------- */
 /* Card flip styling */
+/* ----------------- */
 
 .card,
 .frontCard,
@@ -353,7 +411,16 @@ a:hover {
   visibility: hidden;
 }
 
+.disable {
+  display: none;
+}
+
+
+/* -------------- */
+/* Footer styling */
+/* -------------- */
+
 footer {
-  margin-top: 20px;
+  margin-top: 30px;
   padding: 20px 0;
 }
