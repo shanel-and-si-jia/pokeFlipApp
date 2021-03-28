@@ -228,7 +228,7 @@ html {
 }
 
 body {
-  background: url(./assets/background.jpg);
+  background: url(./assets/background.png);
   background-size: cover;
   min-height: 100vh;
 }
@@ -257,6 +257,11 @@ h1 {
   text-transform: uppercase;
 }
 
+h2 {
+  line-height: 20px;
+  padding: 0 50px;
+}
+
 h2,
 label {
   font-size: 0.7rem;
@@ -273,12 +278,18 @@ a {
   transition: all 0.3s;
 }
 
-a:hover {
+a:hover,
+a:focus {
   color: #000;
 }
 
 .wrapper {
   min-height: 100vh;
+}
+
+.start:focus,
+select:focus {
+  box-shadow: 0 0 25px #2468b1;
 }
 
 /* ------------------ */
@@ -423,23 +434,121 @@ footer {
 /* Media Queries  */
 /* -------------- */
 
-@media (max-width: 500px) {
+@media (max-width: 701px) {
   .gameContainer {
     width: 100%;
   }
-
-  .start {
-    top: calc(70% - 40px);
+  .card,
+  .frontCard,
+  .backFace {
+    width: 100px;
+    height: 120px;
   }
+  .frontFace {
+    margin-bottom: 0;
+  }
+  .frontCard p {
+    font-size: 0.4rem;
+  }
+}
 
+@media (max-width: 530px) {
+  .wrapper {
+    min-height: 85vh;
+  }
+  .card,
+  .frontCard,
+  .backFace {
+    width: 90px;
+    height: 100px;
+  }
+  .card {
+    margin: 8px;
+  }
+  .frontCard p {
+    font-size: 0.33rem;
+  }
+  footer p {
+    padding: 0 100px;
+    line-height: 16px;
+  }
+}
+
+@media (max-width: 500px) {
+  h2 {
+    padding: 0 40px;
+  }
+  .start {
+    top: calc(70% - 100px);
+  }
+}
+
+@media (max-width: 476px) {
+  .tryCounter p {
+    font-size: 0.7rem;
+    line-height: 20px;
+  }
+  .card {
+    margin: 5px;
+  }
+  footer p {
+    padding: 0 65px;
+  }
+}
+
+@media (max-width: 438px) {
   .card,
   .frontCard,
   .backFace {
     width: 80px;
-    height: 100px;
+    height: 95px;
   }
+  .frontFace {
+    width: 90%;
+  }
+  .card {
+    margin: 3px;
+  }
+}
 
-  .frontCard p {
-    font-size: 0.3rem;
+@media (max-width: 406px) {
+  h2 {
+    padding: 0 25px;
+  }
+  .selection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  label {
+    line-height: 20px;
+  }
+  footer p {
+    padding: 0 30px;
+  }
+}
+
+@media (max-width: 378px) {
+  h2 {
+    font-size: 0.65rem;
+    padding: 0 10px;
+  }
+  .tryCounter p {
+    padding: 0 50px;
+  }
+}
+
+@media (max-width: 336px) {
+  h1 {
+    font-size: 1.3rem;
+  }
+  footer p {
+    padding: 0 10px;
+  }
+}
+
+@media (max-height: 430px) {
+  .start {
+    top: calc(80% - 110px);
   }
 }
