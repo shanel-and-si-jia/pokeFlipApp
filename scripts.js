@@ -106,27 +106,28 @@ pokeApp.setCards = (data) => {
 };
 
 // Function that will be attached to event listener to flip a card
-pokeApp.flipCard = function() {
+pokeApp.flipCard = function(clickedCard) {
     // Check if the board is locked, if so do nothing
     if (pokeApp.lockBoard) return;
     // Check if first card is selected again, if so do nothing
-    if (this === pokeApp.firstCard) return;
-    
+    if (clickedCard === pokeApp.firstCard) return;
+    // console.log(this);
+
     // Add class to card to flip it over
-    this.classList.add('flip')
+    clickedCard.classList.add('flip')
 
     // Check if hasFlipped is true or false    
     if(!pokeApp.hasFlipped){
         // If hasFlipped is false make it true
         pokeApp.hasFlipped = true;
         // Change value of firstCard to card that was just clicked
-        pokeApp.firstCard = this;
+        pokeApp.firstCard = clickedCard;
         
     } else {
         // If hasFlipped is true make it false
         pokeApp.hasFlipped = false;
         // Change value of secondCard to card that was just clicked
-        pokeApp.secondCard = this;
+        pokeApp.secondCard = clickedCard;
         // Run function to check if cards match
         pokeApp.checkIfMatch();
     }
@@ -287,14 +288,15 @@ pokeApp.endGame = () => {
 pokeApp.init = () => {
     pokeApp.difficulty();
     pokeApp.startGame();
-    pokeApp.cards.forEach(card => card.addEventListener('click', pokeApp.flipCard));
+    pokeApp.cards.forEach(card => card.addEventListener('click', function() {
+        pokeApp.flipCard(this);
+    }));
     pokeApp.cards.forEach(card => card.addEventListener('keyup', function(e) {
         if (e.key === 'Enter') {
-            console.log(this);  
-            pokeApp.flipCard();
-        }
-    }));
+            pokeApp.flipCard(this);
+    }}));
     pokeApp.form.reset();
 }
+
 // Call init to start our app
 pokeApp.init();
