@@ -191,7 +191,7 @@ pokeApp.difficulty = () => {
     });
 };
 
-// Shuffles poke cards to random order
+// Shuffles poke cards to random order using Fisher–Yates shuffle method
 pokeApp.shuffle = (array) => {
     let currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -220,7 +220,7 @@ pokeApp.startState = () => {
         })
         .then(() => {
     
-        pokeApp.subHead.innerText = "Click the cards to find the matching Pokemon."
+        pokeApp.subHead.innerText = 'Click the cards to find the matching Pokemon.'
     
         // When start game button is clicked, remove hide class from gameboard
         pokeApp.game.classList.remove('hide');
@@ -272,12 +272,12 @@ pokeApp.endGame = () => {
     if(pokeApp.numTry === 0) {
         pokeApp.lockBoard = true;
         setTimeout(() => {
-            pokeApp.tryText.innerText = `Sorry, you have run out of tries`
+            pokeApp.tryText.innerText = 'Sorry, you have run out of tries'
         }, 900)
         pokeApp.endState()
     } else if(pokeApp.matches === 8) {
         setTimeout(() => {
-            pokeApp.tryText.innerText = `Congratulations, you have won! You have a great memory.`
+            pokeApp.tryText.innerText = 'Congratulations, you have won! You have a great memory.'
         }, 900)
         pokeApp.endState()
     } else {
