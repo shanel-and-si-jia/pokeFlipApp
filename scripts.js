@@ -87,21 +87,23 @@ pokeApp.getPokes = async () => {
         pokeApp.pokeArray[i].image = image;
     }
     return pokeApp.pokeArray; 
-  }
+}
 
-    // function to set poke's on cards
-    pokeApp.setCards = (data) => {
-        // Makes copy of pokeArray array
-        const pokeArrayCopy = data.map(poke => poke);
-        // loops through copy and pushes objects to original pokeArray
-        pokeArrayCopy.forEach(obj => data.push(obj));
-        // loops through frontFaces images and assigns image source and text content from pokeArray data.
-        for (let i = 0; i < pokeApp.frontFaces.length; i++) {
-            pokeApp.pElements[i].textContent = data[i].name;
-            pokeApp.frontFaces[i].src = data[i].image;
-            pokeApp.frontFaces[i].alt = data[i].alt;
-        }
-      };
+// function to set poke's on cards
+pokeApp.setCards = (data) => {
+    // Makes copy of pokeArray array
+    const pokeArrayCopy = data.map(poke => poke);
+    // loops through copy and pushes objects to original pokeArray
+    pokeArrayCopy.forEach(obj => data.push(obj));
+    //shuffles the cards after array of 16 is made
+    let shuffled = pokeApp.shuffle(data);
+    // loops through frontFaces images and assigns image source and text content from pokeArray data.
+    for (let i = 0; i < pokeApp.frontFaces.length; i++) {
+        pokeApp.pElements[i].textContent = shuffled[i].name;
+        pokeApp.frontFaces[i].src = shuffled[i].image;
+        pokeApp.frontFaces[i].alt = shuffled[i].alt;
+    }
+};
 
 // Function that will be attached to event listener to flip a card
 pokeApp.flipCard = function() {
@@ -182,29 +184,24 @@ pokeApp.difficulty = () => {
     pokeApp.startBtn.disabled = true;
     pokeApp.difficultyValue.addEventListener('change', () => {
         pokeApp.numTry = pokeApp.difficultyValue.value;
-        if (pokeApp.numTry == 14 || 12 || 8) {
+        if (pokeApp.numTry === 14 || 10 || 6) {
             pokeApp.startBtn.disabled = false;
         }
     });
 };
 
 // Shuffles poke cards to random order
-pokeApp.shuffle = () => {
-    pokeApp.cards.forEach(card => {
-        // creates random number between 0 and 17
-        let randomPos = Math.floor(Math.random() * 18);
-        // sets order of element based on random number
-        card.style.order = randomPos;
-    });
-};
+pokeApp.shuffle = (array) => {
+    let currentIndex = array.length, temporaryValue, randomIndex;
 
-// Start game button function
-pokeApp.startGame = () => {
-    pokeApp.startBtn.addEventListener('click', () => {
-        // Remove difficulty option once game starts
-        pokeApp.form.classList.add('disable');
-        pokeApp.startState();
-    }, {once: true})
+    while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+    }
+    return array;
 };
 
 pokeApp.startState = () => {
@@ -216,9 +213,11 @@ pokeApp.startState = () => {
     pokeApp.startBtn.textContent = 'Loading...'
     pokeApp.randomNums = pokeApp.randomUnique(100, 8);
     
-    pokeApp.getPokes().then(pokeData => {
+    pokeApp.getPokes()
+        .then(pokeData => {
         pokeApp.setCards(pokeData)
-    }).then(() => {
+        })
+        .then(() => {
     
         pokeApp.subHead.innerText = "Click the cards to find the matching Pokemon."
     
@@ -232,6 +231,15 @@ pokeApp.startState = () => {
         pokeApp.tryText.innerText = `You have: ${pokeApp.numTry} tries left`;
     })
 }
+
+// Start game button function
+pokeApp.startGame = () => {
+    pokeApp.startBtn.addEventListener('click', () => {
+        // Remove difficulty option once game starts
+        pokeApp.form.classList.add('disable');
+        pokeApp.startState();
+    }, {once: true})
+};
 
 pokeApp.endState = () => {
     // When game end, remove game board and show notice
@@ -277,12 +285,16 @@ pokeApp.endGame = () => {
 }
 
 pokeApp.init = () => {
-    pokeApp.shuffle();
     pokeApp.difficulty();
     pokeApp.startGame();
     pokeApp.cards.forEach(card => card.addEventListener('click', pokeApp.flipCard));
+    pokeApp.cards.forEach(card => card.addEventListener('keyup', function(e) {
+        if (e.key === 'Enter') {
+            console.log(this);  
+            pokeApp.flipCard();
+        }
+    }));
     pokeApp.form.reset();
 }
-
 // Call init to start our app
 pokeApp.init();

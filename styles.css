@@ -288,7 +288,8 @@ a:focus {
 }
 
 .start:focus,
-select:focus {
+select:focus,
+.card:focus {
   box-shadow: 0 0 25px #2468b1;
 }
 
@@ -375,6 +376,7 @@ select {
 }
 
 .card {
+  border-radius: 20px;
   position: relative;
   margin: 10px;
   transform-style: preserve-3d;
