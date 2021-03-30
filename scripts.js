@@ -1,47 +1,49 @@
-// namespacing object
+// Namespacing object
 const pokeApp = {}
+
+// Array to hold data from API call
 pokeApp.pokeArray = [
     {
-      name: '',
-      image: '',
-      alt: ''
+        name: '',
+        image: '',
+        alt: ''
     },
     {
-      name: '',
-      image: '',
-      alt: ''
+        name: '',
+        image: '',
+        alt: ''
     },
     {
-      name: '',
-      image: '',
-      alt: ''
+        name: '',
+        image: '',
+        alt: ''
     },
     {
-      name: '',
-      image: '',
-      alt: ''
+        name: '',
+        image: '',
+        alt: ''
     },
     {
-      name: '',
-      image: '',
-      alt: ''
+        name: '',
+        image: '',
+        alt: ''
     },
     {
-      name: '',
-      image: '',
-      alt: ''
+        name: '',
+        image: '',
+        alt: ''
     },
     {
-      name: '',
-      image: '',
-      alt: ''
+        name: '',
+        image: '',
+        alt: ''
     },
     {
-      name: '',
-      image: '',
-      alt: ''
+        name: '',
+        image: '',
+        alt: ''
     }
-  ];
+];
 
 pokeApp.cards = document.querySelectorAll('.card');
 pokeApp.startBtn = document.querySelector('.start');
@@ -65,9 +67,9 @@ pokeApp.randomUnique = (range, count) => {
     let nums = new Set();
     while(nums.size < count) {
         nums.add(Math.floor(Math.random() * (range - 1 + 1) + 1))
-    }
+    };
     return[...nums]
-}
+};
 
 // Function to call API and get pokes
 pokeApp.getPokes = async () => {
@@ -85,9 +87,9 @@ pokeApp.getPokes = async () => {
         pokeApp.pokeArray[i].name = pokeName;
         pokeApp.pokeArray[i].alt = pokeName;
         pokeApp.pokeArray[i].image = image;
-    }
+    };
     return pokeApp.pokeArray; 
-}
+};
 
 // function to set poke's on cards
 pokeApp.setCards = (data) => {
@@ -102,7 +104,7 @@ pokeApp.setCards = (data) => {
         pokeApp.pElements[i].textContent = shuffled[i].name;
         pokeApp.frontFaces[i].src = shuffled[i].image;
         pokeApp.frontFaces[i].alt = shuffled[i].alt;
-    }
+    };
 };
 
 // Function that will be attached to event listener to flip a card
@@ -111,7 +113,6 @@ pokeApp.flipCard = function(clickedCard) {
     if (pokeApp.lockBoard) return;
     // Check if first card is selected again, if so do nothing
     if (clickedCard === pokeApp.firstCard) return;
-    // console.log(this);
 
     // Add class to card to flip it over
     clickedCard.classList.add('flip')
@@ -130,8 +131,8 @@ pokeApp.flipCard = function(clickedCard) {
         pokeApp.secondCard = clickedCard;
         // Run function to check if cards match
         pokeApp.checkIfMatch();
-    }
-}
+    };
+};
 
 // Function to check if first card and second card flipped match eachother
 pokeApp.checkIfMatch = function() {
@@ -168,8 +169,8 @@ pokeApp.checkIfMatch = function() {
             // Run endGame if user runs out of tries
             pokeApp.endGame();
         }, 1000);
-    }
-}
+    };
+};
 
 // Game board error control function
 pokeApp.resetBoard = () => {
@@ -177,7 +178,7 @@ pokeApp.resetBoard = () => {
     pokeApp.lockBoard = false;
     pokeApp.firstCard = null;
     pokeApp.secondCard = null;
-}
+};
 
 // Function for difficulty selection
 pokeApp.difficulty = () => {
@@ -187,7 +188,7 @@ pokeApp.difficulty = () => {
         pokeApp.numTry = pokeApp.difficultyValue.value;
         if (pokeApp.numTry === 14 || 10 || 6) {
             pokeApp.startBtn.disabled = false;
-        }
+        };
     });
 };
 
@@ -201,7 +202,7 @@ pokeApp.shuffle = (array) => {
     temporaryValue = array[currentIndex];
     array[currentIndex] = array[randomIndex];
     array[randomIndex] = temporaryValue;
-    }
+    };
     return array;
 };
 
@@ -230,8 +231,8 @@ pokeApp.startState = () => {
         // Display how many trials remains
         pokeApp.tryText.classList.remove('hide');
         pokeApp.tryText.innerText = `You have: ${pokeApp.numTry} tries left`;
-    })
-}
+    });
+};
 
 // Start game button function
 pokeApp.startGame = () => {
@@ -265,7 +266,7 @@ pokeApp.endState = () => {
             pokeApp.startState();
         }, {once: true})
     }, 900);
-}
+};
 
 // End game once number of tries run out
 pokeApp.endGame = () => {
@@ -282,8 +283,8 @@ pokeApp.endGame = () => {
         pokeApp.endState()
     } else {
         return;
-    }
-}
+    };
+};
 
 pokeApp.init = () => {
     pokeApp.difficulty();
@@ -292,11 +293,12 @@ pokeApp.init = () => {
         pokeApp.flipCard(this);
     }));
     pokeApp.cards.forEach(card => card.addEventListener('keyup', function(e) {
-        if (e.key === 'Enter') {
+        if(e.key === 'Enter') {
             pokeApp.flipCard(this);
-    }}));
+        };
+    }));
     pokeApp.form.reset();
-}
+};
 
 // Call init to start our app
 pokeApp.init();
