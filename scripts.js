@@ -267,11 +267,13 @@ pokeApp.endGame = () => {
     if(pokeApp.numTry === 0) {
         pokeApp.lockBoard = true;
         setTimeout(() => {
+            window.scrollTo(0, 0);
             pokeApp.tryText.innerText = 'Sorry, you have run out of tries';
         }, 900);
         pokeApp.endState();
     } else if(pokeApp.matches === 8) {
         setTimeout(() => {
+            window.scrollTo(0, 0);
             pokeApp.tryText.innerText = 'Congratulations, you have won! You have a great memory.';
         }, 900);
         pokeApp.endState();
