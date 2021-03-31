@@ -225,6 +225,7 @@ template {
 html {
   font-family: 'Press Start 2P', cursive;
   font-size: 125%;
+  scroll-behavior: smooth;
 }
 
 body {
