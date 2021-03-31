@@ -249,9 +249,6 @@ pokeApp.endState = () => {
     
     // Start/Reply button and difficult option reappear
     setTimeout(() => {
-        // Give player option to select difficulty again
-        pokeApp.form.classList.remove('disable');
-        pokeApp.numTry = pokeApp.difficultyValue.value;
         // When game ends, reset already matched cards to default value
         pokeApp.cards.forEach((card) => {
             card.classList.remove('matched', 'flip');
@@ -260,11 +257,8 @@ pokeApp.endState = () => {
         pokeApp.startBtn.innerText = 'Play Again';
         pokeApp.startBtn.classList.remove('hide');
         pokeApp.startBtn.addEventListener('click', () => {
-            pokeApp.pokeArray.splice(8, 8);
-            // Remove difficulty option once game starts
-            pokeApp.form.classList.add('disable');
-            pokeApp.startState();
-        }, {once: true})
+           location.reload()
+        })
     }, 900);
 };
 
