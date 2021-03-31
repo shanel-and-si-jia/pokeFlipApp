@@ -66,23 +66,23 @@ pokeApp.matches = 0;
 pokeApp.randomUnique = (range, count) => {
     let nums = new Set();
     while(nums.size < count) {
-        nums.add(Math.floor(Math.random() * (range - 1 + 1) + 1))
+        nums.add(Math.floor(Math.random() * (range - 1 + 1) + 1));
     };
-    return[...nums]
+    return[...nums];
 };
 
 // Function to call API and get pokes
 pokeApp.getPokes = async () => {
     for (let i = 0; i < pokeApp.pokeArray.length; i++) {
         // fetches poke with id based on randomNums
-        const request = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokeApp.randomNums[i]}/`)
+        const request = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokeApp.randomNums[i]}/`);
         // converts data to json
-        const data = await request.json()
+        const data = await request.json();
         //Get poke's name
         const pokeName = data.name;
         // Get poke's image
         const sprite = data.sprites.other;
-        const image = sprite[`official-artwork`].front_default;
+        const image = sprite['official-artwork'].front_default;
         // Set name and image in pokeArray
         pokeApp.pokeArray[i].name = pokeName;
         pokeApp.pokeArray[i].alt = pokeName;
@@ -115,7 +115,7 @@ pokeApp.flipCard = function(clickedCard) {
     if (clickedCard === pokeApp.firstCard) return;
 
     // Add class to card to flip it over
-    clickedCard.classList.add('flip')
+    clickedCard.classList.add('flip');
 
     // Check if hasFlipped is true or false    
     if(!pokeApp.hasFlipped){
@@ -141,14 +141,14 @@ pokeApp.checkIfMatch = function() {
         pokeApp.firstCard.removeEventListener('click', pokeApp.flipCard);
         pokeApp.secondCard.removeEventListener('click', pokeApp.flipCard);
         pokeApp.lockBoard = true;
-        pokeApp.matches++
+        pokeApp.matches++;
         // Add set time before removing matched card for user to see
         setTimeout(() => {
-            pokeApp.firstCard.classList.add('matched')
-            pokeApp.secondCard.classList.add('matched')
+            pokeApp.firstCard.classList.add('matched');
+            pokeApp.secondCard.classList.add('matched');
             pokeApp.resetBoard();
             // run endGame if all matches have been made
-            pokeApp.endGame()
+            pokeApp.endGame();
         }, 1000);
     
     } else {
@@ -217,11 +217,11 @@ pokeApp.startState = () => {
     
     pokeApp.getPokes()
         .then(pokeData => {
-        pokeApp.setCards(pokeData)
+        pokeApp.setCards(pokeData);
         })
         .then(() => {
     
-        pokeApp.subHead.innerText = 'Click the cards to find the matching Pokemon.'
+        pokeApp.subHead.innerText = 'Click the cards to find the matching Pokemon.';
     
         // When start game button is clicked, remove hide class from gameboard
         pokeApp.game.classList.remove('hide');
@@ -240,7 +240,7 @@ pokeApp.startGame = () => {
         // Remove difficulty option once game starts
         pokeApp.form.classList.add('disable');
         pokeApp.startState();
-    }, {once: true})
+    }, {once: true});
 };
 
 pokeApp.endState = () => {
@@ -257,8 +257,8 @@ pokeApp.endState = () => {
         pokeApp.startBtn.innerText = 'Play Again';
         pokeApp.startBtn.classList.remove('hide');
         pokeApp.startBtn.addEventListener('click', () => {
-           location.reload()
-        })
+            location.reload();
+        });
     }, 900);
 };
 
@@ -267,14 +267,14 @@ pokeApp.endGame = () => {
     if(pokeApp.numTry === 0) {
         pokeApp.lockBoard = true;
         setTimeout(() => {
-            pokeApp.tryText.innerText = 'Sorry, you have run out of tries'
-        }, 900)
-        pokeApp.endState()
+            pokeApp.tryText.innerText = 'Sorry, you have run out of tries';
+        }, 900);
+        pokeApp.endState();
     } else if(pokeApp.matches === 8) {
         setTimeout(() => {
-            pokeApp.tryText.innerText = 'Congratulations, you have won! You have a great memory.'
-        }, 900)
-        pokeApp.endState()
+            pokeApp.tryText.innerText = 'Congratulations, you have won! You have a great memory.';
+        }, 900);
+        pokeApp.endState();
     } else {
         return;
     };

@@ -483,6 +483,9 @@ footer {
   .start {
     top: calc(70% - 100px);
   }
+  .card:focus {
+    box-shadow: 0 0 15px #2468b1;
+  }
 }
 
 @media (max-width: 476px) {
@@ -536,7 +539,7 @@ footer {
     padding: 0 10px;
   }
   .tryCounter p {
-    padding: 0 50px;
+    padding: 0 30px;
   }
 }
 
